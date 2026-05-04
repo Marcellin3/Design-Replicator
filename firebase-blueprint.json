@@ -1,0 +1,44 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile and subscription data",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string" },
+        "displayName": { "type": "string" },
+        "trialStartDate": { "type": "string", "format": "date-time" },
+        "generationsCount": { "type": "integer" },
+        "importsCount": { "type": "integer" },
+        "isPremium": { "type": "boolean" }
+      },
+      "required": ["email"]
+    },
+    "Design": {
+      "title": "Design",
+      "description": "A design project created by a user",
+      "type": "object",
+      "properties": {
+        "ownerId": { "type": "string" },
+        "name": { "type": "string" },
+        "originalImageUrl": { "type": "string" },
+        "analysis": { "type": "object" },
+        "prompt": { "type": "string" },
+        "generatedImageUrl": { "type": "string" },
+        "status": { "type": "string", "enum": ["draft", "analyzing", "generating", "completed"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["ownerId", "status", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profiles"
+    },
+    "/designs/{designId}": {
+      "schema": "Design",
+      "description": "User design projects"
+    }
+  }
+}
